@@ -4,7 +4,8 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons/'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import Decks from './components/Decks'
@@ -12,7 +13,7 @@ import AddDeck from './components/AddDeck'
 
 const Tab = createMaterialBottomTabNavigator()
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 export default function App() {
   return (
