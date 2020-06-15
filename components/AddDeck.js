@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { handleSaveDeck } from '../actions/decks'
 
 const styles = StyleSheet.create({
     container: {
@@ -40,6 +41,15 @@ class AddDeck extends Component {
     }
     render() {
         const { input } = this.state
+        const { dispatch } = this.props
+        let deck = {
+            title: input,
+            questions: []
+        }
+        const handleSubmit = () => {
+            dispatch(handleSaveDeck(deck))
+            this.setState(() => ({ input: '' }))
+        }
         return (
             <View style={styles.container} >
                 <Text style={styles.title}>
@@ -48,7 +58,7 @@ class AddDeck extends Component {
                 <TextInput style={styles.inputField} value={input}
                     onChangeText={(text) => this.setState({ input: text })}
                     placeholder='Deck title' />
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
                     <Text style={{ fontSize: 20 }}>
                         SUBMIT
                     </Text>

@@ -25,3 +25,12 @@ export const handleInitialData = () => {
             })
     }
 }
+
+export const handleSaveDeck = (deck) => {
+    return (dispatch) => {
+        return storeDeck(deck)
+            .then(() => {
+                dispatch(saveDeck(deck))
+            })
+    }
+}

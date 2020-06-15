@@ -1,4 +1,4 @@
-import { RECIEVE_DECKS } from '../actions/decks'
+import { RECIEVE_DECKS, SAVE_DECK } from '../actions/decks'
 
 export default (state = {}, action) => {
     switch(action.type) {
@@ -6,6 +6,13 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 ...action.decks
+            }
+        case SAVE_DECK:
+            return {
+                ...state,
+                [action.deck.title]: {
+                    ...action.deck
+                }
             }
         default:
             return state
