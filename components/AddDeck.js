@@ -47,6 +47,11 @@ class AddDeck extends Component {
             questions: []
         }
         const handleSubmit = () => {
+            if (input === '') {
+                alert('Title can not be empty')
+                return
+            }
+
             dispatch(handleSaveDeck(deck))
             this.setState(() => ({ input: '' }))
         }
@@ -58,7 +63,8 @@ class AddDeck extends Component {
                 <TextInput style={styles.inputField} value={input}
                     onChangeText={(text) => this.setState({ input: text })}
                     placeholder='Deck title' />
-                <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+                <TouchableOpacity style={styles.btn}
+                    onPress={handleSubmit}>
                     <Text style={{ fontSize: 20 }}>
                         SUBMIT
                     </Text>

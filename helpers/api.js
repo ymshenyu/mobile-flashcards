@@ -12,13 +12,13 @@ export const getDecks = async () => {
 }
 
 export const storeDeck = async (deck) => {
-    const decks = getDecks()
     const jsonValue = JSON.stringify({
-        ...decks,
-        deck
+        [deck.title]: {
+            ...deck
+        }
     })
     try {
-        await AsyncStorage.setItem(storageKey, jsonValue)
+        await AsyncStorage.mergeItem(storageKey, jsonValue)
     } catch (e) {
         console.error('Error: ', e)
     }

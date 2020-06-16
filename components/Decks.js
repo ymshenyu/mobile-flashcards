@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/decks'
+import DeckCard from './DeckCard'
 
 const styles = StyleSheet.create({
     container: {
@@ -17,21 +18,12 @@ class Decks extends Component {
         dispatch(handleInitialData())
     }
     render() {
-        const { decks } = this.props
         return (
             <View style={styles.container}>
-                <Text>
-                    {JSON.stringify(decks)}
-                </Text>
+                <DeckCard />
             </View>
         )
     }
 }
 
-const mapStateToProps = ({ decks }) => {
-    return {
-        decks
-    }
-}
-
-export default connect(mapStateToProps)(Decks)
+export default connect()(Decks)
