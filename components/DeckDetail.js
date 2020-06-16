@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { handleDeleteDeck } from '../actions/decks'
 
 const styles = StyleSheet.create({
     container: {
@@ -43,33 +44,43 @@ const styles = StyleSheet.create({
     }
 })
 
-const DeckDetail = (props) => {
-    const { deck, dispatch } = props
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                {deck.title}
+class DeckDetail extends Component {
+    shouldComponentUpdate(next) {
+        return next.deck !== undefined
+    }
+    handleDelete(title) {
+        const { dispatch, navigation } = this.props
+        dispatch(handleDeleteDeck(title))
+        navigation.goBack()
+    }
+    render() {
+        const { deck } = this.props
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>
+                    {deck.title}
+                </Text>
+                <Text style={styles.subtitle}>
+                    {deck['questions'].length} cards
             </Text>
-            <Text style={styles.subtitle}>
-                {deck['questions'].length} cards
-            </Text>
-            <TouchableOpacity style={styles.primaryBtn}>
-                <Text style={styles.btnText}>
-                    Add Card
+                <TouchableOpacity style={styles.primaryBtn}>
+                    <Text style={styles.btnText}>
+                        Add Card
                 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.secondaryBtn}>
-                <Text style={styles.btnText}>
-                    Start Quiz
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.secondaryBtn}>
+                    <Text style={styles.btnText}>
+                        Start Quiz
                 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteBtn}>
-                <Text style={[styles.btnText, { color: '#ef5350' }]}>
-                    Delete Deck
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.deleteBtn} onPress={() => this.handleDelete(deck.title)}>
+                    <Text style={[styles.btnText, { color: '#ef5350' }]}>
+                        Delete Deck
                 </Text>
-            </TouchableOpacity>
-        </View>
-    )
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
 
 const mapStateToProps = ({ decks }, { route }) => {

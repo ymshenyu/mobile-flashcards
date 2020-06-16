@@ -1,7 +1,7 @@
-import { RECIEVE_DECKS, SAVE_DECK } from '../actions/decks'
+import { RECIEVE_DECKS, SAVE_DECK, REMOVE_DECK } from '../actions/decks'
 
 export default (state = {}, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case RECIEVE_DECKS:
             return {
                 ...state,
@@ -14,6 +14,10 @@ export default (state = {}, action) => {
                     ...action.deck
                 }
             }
+        case REMOVE_DECK:
+            const next = { ...state }
+            delete next[action.title]
+            return next
         default:
             return state
     }

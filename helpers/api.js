@@ -23,3 +23,14 @@ export const storeDeck = async (deck) => {
         console.error('Error: ', e)
     }
 }
+
+export const removeDeck = async (title) => {
+    try {
+        const decks = await AsyncStorage.getItem(storageKey)
+        const jsonValue = JSON.parse(decks)
+        delete jsonValue[title]
+        await AsyncStorage.setItem(storageKey, JSON.stringify(jsonValue))
+    } catch (e) {
+        console.error('Error: ', e)
+    }
+}
