@@ -5,16 +5,16 @@ import Constants from 'expo-constants'
 
 const DeckCard = (props) => {
     const windowWidth = Dimensions.get('window').width
-    const { decks } = props
+    const { decks, navigation } = props
     return (
         <View style={styles.container}>
             <FlatList data={decks}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.card}>
-                        <Text style={{ fontSize: 25 }}>
+                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('DeckDetail', { name: item.title })}>
+                        <Text style={{ fontSize: 25, fontWeight: 'bold' }}>
                             {item.title}
                         </Text>
-                        <Text style={{ fontSize: 20, color: 'grey' }}>
+                        <Text style={{ fontSize: 20, color: 'grey', fontWeight: 'bold' }}>
                             {item.totalOfCards} cards
                         </Text>
                     </TouchableOpacity>

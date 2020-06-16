@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import Tabs from './components/Tabs'
+import DeckDetail from './components/DeckDetail'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
@@ -18,7 +19,8 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Home'>
-          <Stack.Screen name='Home' component={Tabs} /> 
+          <Stack.Screen name='Home' component={Tabs} options={{ headerShown: false }} /> 
+          <Stack.Screen name='DeckDetail' component={DeckDetail} options={({ route }) => ({ title: route.params.name })} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

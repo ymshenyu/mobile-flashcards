@@ -18,9 +18,10 @@ class Decks extends Component {
         dispatch(handleInitialData())
     }
     render() {
+        const { navigation } = this.props
         return (
             <View style={styles.container}>
-                <DeckCard />
+                <DeckCard navigation={navigation} />
             </View>
         )
     }

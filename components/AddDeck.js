@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         textAlign: 'center',
+        fontWeight: 'bold',
     },
     inputField: {
         alignSelf: 'stretch',
@@ -65,7 +66,7 @@ class AddDeck extends Component {
                     placeholder='Deck title' />
                 <TouchableOpacity style={styles.btn}
                     onPress={handleSubmit}>
-                    <Text style={{ fontSize: 20 }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                         SUBMIT
                     </Text>
                 </TouchableOpacity>
