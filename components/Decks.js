@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/decks'
+import { handleInitialData } from '../actions'
 import DeckCard from './DeckCard'
 
 const styles = StyleSheet.create({

@@ -1,8 +1,9 @@
-import { getDecks, storeDeck, removeDeck } from '../helpers/api'
+import { getDecks, storeDeck, removeDeck, saveQuestion } from '../helpers/api'
 
 export const RECIEVE_DECKS = 'RECIEVE_DECKS'
 export const SAVE_DECK = 'SAVE_DECK'
 export const REMOVE_DECK = 'REMOVE_DECK'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 const recieveDecks = (decks) => {
     return {
@@ -22,6 +23,14 @@ const deleteDeck = (title) => {
     return {
         type: REMOVE_DECK,
         title
+    }
+}
+
+const addQuestion = (title, question) => {
+    return {
+        type: ADD_QUESTION,
+        title,
+        question
     }
 }
 
@@ -48,6 +57,15 @@ export const handleSaveDeck = (deck) => {
         return storeDeck(deck)
             .then(() => {
                 dispatch(saveDeck(deck))
+            })
+    }
+}
+
+export const handleAddQuestion = (title, question) => {
+    return (dispatch) => {
+        return saveQuestion(title, question)
+            .then(() => {
+                dispatch(addQuestion(title, question))
             })
     }
 }

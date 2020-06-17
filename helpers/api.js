@@ -27,9 +27,26 @@ export const storeDeck = async (deck) => {
 export const removeDeck = async (title) => {
     try {
         const decks = await AsyncStorage.getItem(storageKey)
-        const jsonValue = JSON.parse(decks)
-        delete jsonValue[title]
-        await AsyncStorage.setItem(storageKey, JSON.stringify(jsonValue))
+        const results = JSON.parse(decks)
+        delete results[title]
+        await AsyncStorage.setItem(storageKey, JSON.stringify(results))
+    } catch (e) {
+        console.error('Error: ', e)
+    }
+}
+
+export const saveQuestion = async (title, question) => {
+    try {
+        const decks = await AsyncStorage.getItem(storageKey)
+        const results = JSON.parse(decks)
+        const jsonValue = JSON.stringify({
+            ...results,
+            [title]: {
+                ...results[title],
+                questions: results[title].questions.concat([question])
+            }
+        })
+        await AsyncStorage.setItem(storageKey, jsonValue)
     } catch (e) {
         console.error('Error: ', e)
     }

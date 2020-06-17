@@ -10,7 +10,7 @@ const DeckCard = (props) => {
         <View style={styles.container}>
             <FlatList data={decks}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('DeckDetail', { name: item.title })}>
+                    <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Deck Detail', { name: item.title })}>
                         <Text style={{ fontSize: 25, fontWeight: 'bold' }}>
                             {item.title}
                         </Text>

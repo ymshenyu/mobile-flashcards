@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { handleDeleteDeck } from '../actions/decks'
+import { handleDeleteDeck } from '../actions'
 
 const styles = StyleSheet.create({
     container: {
@@ -54,7 +54,7 @@ class DeckDetail extends Component {
         navigation.goBack()
     }
     render() {
-        const { deck } = this.props
+        const { deck, navigation } = this.props
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>
@@ -62,8 +62,8 @@ class DeckDetail extends Component {
                 </Text>
                 <Text style={styles.subtitle}>
                     {deck['questions'].length} cards
-            </Text>
-                <TouchableOpacity style={styles.primaryBtn}>
+                </Text>
+                <TouchableOpacity style={styles.primaryBtn} onPress={() => navigation.navigate('Add Card', { name: deck.title })}>
                     <Text style={styles.btnText}>
                         Add Card
                 </Text>

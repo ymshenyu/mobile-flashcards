@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { handleSaveDeck } from '../actions'
+import { handleAddQuestion } from '../actions'
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
@@ -36,36 +35,37 @@ const styles = StyleSheet.create({
     },
 })
 
-class AddDeck extends Component {
+class AddCard extends Component {
     state = {
-        input: ''
+        question: '',
+        answer: ''
     }
     render() {
-        const { input } = this.state
-        const { dispatch, navigation } = this.props
-        let deck = {
-            title: input,
-            questions: []
+        const { question, answer } = this.state
+        const { dispatch, route, navigation } = this.props
+        let newQuestion = {
+            question,
+            answer
         }
         const handleSubmit = () => {
-            if (input === '') {
-                alert('Title can not be empty')
+            if (question === '' || answer === '') {
+                alert('Question or answer can not be empty')
                 return
             }
 
-            dispatch(handleSaveDeck(deck))
+            dispatch(handleAddQuestion(route.params.name, newQuestion))
                 .then(() => {
-                    navigation.navigate('Deck Detail', { name: input })
+                    navigation.goBack()
                 })
         }
         return (
             <View style={styles.container} >
-                <Text style={styles.title}>
-                    What is the title of your new deck?
-                </Text>
-                <TextInput style={styles.inputField} value={input}
-                    onChangeText={(text) => this.setState({ input: text })}
-                    placeholder='Deck title' />
+                <TextInput style={styles.inputField} value={question}
+                    onChangeText={(text) => this.setState({ question: text })}
+                    placeholder='Question' />
+                <TextInput style={styles.inputField} value={answer}
+                    onChangeText={(text) => this.setState({ answer: text })}
+                    placeholder='Answer' />
                 <TouchableOpacity style={styles.btn}
                     onPress={handleSubmit}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
@@ -77,4 +77,4 @@ class AddDeck extends Component {
     }
 }
 
-export default connect()(AddDeck)
+export default connect()(AddCard)
