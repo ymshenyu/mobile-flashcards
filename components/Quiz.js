@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import { setLocalNotifications, cancelNotifications } from '../utils/helpers'
 
 const styles = StyleSheet.create({
     container: {
@@ -82,6 +83,10 @@ class Quiz extends Component {
         }
         const toDeck = () => {
             navigation.goBack()
+        }
+        if (current === questions.length) {
+            cancelNotifications()
+                .then(setLocalNotifications())
         }
         return (
             <View>

@@ -1,4 +1,4 @@
-import { getDecks, storeDeck, removeDeck, saveQuestion } from '../helpers/api'
+import { getDecks, storeDeck, removeDeck, saveQuestion } from '../utils/api'
 
 export const RECIEVE_DECKS = 'RECIEVE_DECKS'
 export const SAVE_DECK = 'SAVE_DECK'
